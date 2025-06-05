@@ -1,0 +1,23 @@
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem; /* Medium screens */
+  }
+  img {
+    max-width: 120px !important;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 3rem; /* Large screens */
+  }
+  img {
+    max-width: 150px !important;
+  }
+  p {
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,5 @@
+.border-remove {
+    border: none !important; 
+    background: none;
+    outline: none; 
+}
