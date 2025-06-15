@@ -9,11 +9,13 @@ import TripData from './components/TripData';
 import { ratingsData } from './components/Ratings';
 import CustomerSignUp from './components/CustomerSignUp';
 import DriverSignUp from './components/DriverSignUp';
+import SignIn from './pages/signIn';
+import ForgetPassword from './pages/ForgetPassword';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // Dummy SignIn page (replace with real one if needed)
-const SignIn = () => <h2 className="text-center mt-5">Sign In Page</h2>;
+// const SignIn = () => <h2 className="text-center mt-5">Sign In Page</h2>;
 
 function App() {
     const [ratings, setRatings] = useState(ratingsData);
@@ -29,6 +31,7 @@ function App() {
                     <Route path="/" element={<Home ratings={ratings} />} />
                     <Route path="/roles" element={<RoleSelection />} />
                     <Route path="/signin" element={<SignIn />} />
+                    <Route path="/forgot-password" element={<ForgetPassword />} />
                     <Route path="/rate-trip" element={<TripData onNewRating={addRating} />} />
                     <Route path="/register/customer" element={<CustomerSignUp />} />
                     <Route path="/register/driver" element={<DriverSignUp />} />

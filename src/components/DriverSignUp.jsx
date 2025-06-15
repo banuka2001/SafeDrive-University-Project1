@@ -12,9 +12,9 @@ const DriverSignUp = () => {
   };
 
   return (
-    <div className="driver-signup-container py-5">
-      <Container>
-        <div className="driver-signup-form">
+    <Container className="driver-signup-page py-5">
+      <Row className="justify-content-center">
+        <Col md={10} lg={8} xl={6}>
           <div className="text-center">
             <div className="form-icon-container">
               <FaCar className="car-icon" />
@@ -51,19 +51,30 @@ const DriverSignUp = () => {
               </InputGroup>
             </Form.Group>
 
-            <Row>
-              <Col md={6} className="mb-4">
-                <Form.Label>Driver's License</Form.Label>
+            <Row className="g-3">
+                <Col md={6} className="mb-3 mb-md-4">
+                <Form.Label>Driver's License Front Side</Form.Label>
                 <FileUpload
-                  controlId="driverLicense"
-                  uploadText="Click to upload driver's license"
+                  controlId="driverLicenseFront"
+                  uploadText="Click to upload driver's license front side"
                   subText="PNG, JPG up to 5MB"
                   icon={<FaAddressCard size={30} className="text-muted mb-2" />}
                   accept="image/png, image/jpeg"
                   colProps={{ md: 12 }}
                 />
               </Col>
-              <Col md={6} className="mb-4">
+              <Col md={6} className="mb-3 mb-md-4">
+                <Form.Label>Driver's License Back Side</Form.Label>
+                <FileUpload
+                  controlId="driverLicenseBack"
+                  uploadText="Click to upload driver's license back side"
+                  subText="PNG, JPG up to 5MB"
+                  icon={<FaAddressCard size={30} className="text-muted mb-2" />}
+                  accept="image/png, image/jpeg"
+                  colProps={{ md: 12 }}
+                />
+              </Col>
+              <Col md={6} className="mb-3 mb-md-4">
                 <Form.Label>Profile Photo</Form.Label>
                 <FileUpload
                   controlId="profilePhoto"
@@ -76,7 +87,7 @@ const DriverSignUp = () => {
               </Col>
             </Row>
 
-            <Button variant="primary" type="submit" className="w-100 create-account-btn">
+            <Button variant="primary" type="submit" className="w-100 create-account-btn mt-3">
               Create Driver Account
             </Button>
           </Form>
@@ -84,9 +95,9 @@ const DriverSignUp = () => {
           <div className="text-center mt-4">
             <p>Already have an account? <a href="/signin" className="signin-link">Sign in</a></p>
           </div>
-        </div>
-      </Container>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

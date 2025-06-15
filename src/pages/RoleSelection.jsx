@@ -12,12 +12,16 @@ export default function RoleSelection() {
     navigate('/register/customer');
   };
 
+  const handleDriverClick = () => {
+    navigate('/register/driver');
+  };
+
   return (
     <div className="d-flex justify-content-center px-3 py-5">
-      <div className="w-100 text-center col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+      <div className="w-100 text-center col-12 col-md-10 col-lg-8 col-xl-7">
 
         {/* Car Icon */}
-        <div className="mb-4">
+        <div>
           <img
             src={carIcon}
             alt="Car Icon"
@@ -34,13 +38,16 @@ export default function RoleSelection() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-muted mb-4 fs-6 fs-md-5">
+        <p className="text-muted mb-5 fs-6 fs-md-5">
           Choose your role to continue
         </p>
 
         {/* Buttons */}
-<div className="d-flex flex-column flex-sm-row justify-content-center gap-3 flex-wrap">
-  <button className="btn btn-light shadow-sm px-4 py-3 fw-medium book-btn text-primary w-sm-auto style-btn">
+<div className="d-flex flex-column flex-sm-row justify-content-center gap-4 flex-wrap">
+  <button className="btn btn-light shadow-sm px-4 py-3 fw-medium book-btn text-primary w-sm-auto style-btn"
+  onClick={handleDriverClick}
+  >
+    
     <i className="bi bi-people-fill me-2"></i>
     I am a Driver
   </button>
