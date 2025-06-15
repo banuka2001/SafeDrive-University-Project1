@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-white shadow-sm py-3">
+    <nav className="navbar navbar-expand-lg bg-white shadow-sm py-3 sticky-top">
       <div className="container">
 
         {/* Logo */}
@@ -44,6 +44,11 @@ export default function Navbar() {
             <ul className="navbar-nav ms-5 mb-3 mb-lg-0 text-end text-lg-center">
               <li className="nav-item">
                 <Link className="nav-link active fw-semibold" to="/" onClick={() => setIsOpen(false)}>Home</Link>
+              </li>
+
+              {/* Test case for Rate Trip */}
+              <li className="nav-item">
+                <Link className="nav-link" to="/rate-trip" onClick={() => setIsOpen(false)}>Rate Trip</Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#about" onClick={() => setIsOpen(false)}>About</a>

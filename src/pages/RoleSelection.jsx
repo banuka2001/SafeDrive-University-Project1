@@ -1,10 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import carIcon from '../assets/car-icon.png';
 
 import "../styles/RoleSelection.css";
 import "../styles/Buttons.css";
 
 export default function RoleSelection() {
+  const navigate = useNavigate();
+
+  const handleCustomerClick = () => {
+    navigate('/register/customer');
+  };
+
   return (
     <div className="d-flex justify-content-center px-3 py-5">
       <div className="w-100 text-center col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
@@ -37,7 +44,10 @@ export default function RoleSelection() {
     <i className="bi bi-people-fill me-2"></i>
     I am a Driver
   </button>
-  <button className="btn btn-light shadow-sm px-4 py-3 fw-medium d-flex align-items-center justify-content-center gap-2 text-primary w-sm-auto style-btn">
+  <button 
+    className="btn btn-light shadow-sm px-4 py-3 fw-medium d-flex align-items-center justify-content-center gap-2 text-primary w-sm-auto style-btn"
+    onClick={handleCustomerClick}
+  >
     <i className="bi bi-car-front-fill me-2"></i>
     I am a Customer
   </button>

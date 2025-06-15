@@ -32,6 +32,9 @@
     max-width: 320px;
     text-align: left;
     transition: box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   .rating-card-header {

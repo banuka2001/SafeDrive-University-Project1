@@ -1,6 +1,6 @@
 import React from 'react';
-import "../styles/MainSection.css";
-import registerIcon from '../assets/register now.svg';
+import "../../styles/MainSection.css";
+
 
 const MainSection = () => {
   const cardData = [

@@ -2,7 +2,7 @@ import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import '../styles/Ratings.css';
 
-const ratingsData = [
+export const ratingsData = [
   {
     name: 'Rahul Perera',
     avatar: 'https://i.pravatar.cc/150?img=1',
@@ -41,14 +41,17 @@ const ratingsData = [
   }
 ];
 
-const Star = ({ filled }) => (
-  <span className={filled ? 'star filled' : 'star'}>&#9733;</span>
-);
+const Star = (props) => {
+  const { filled } = props;
+  return <span className={filled ? 'star filled' : 'star'}>&#9733;</span>
+};
 
-const Ratings = () => {
+const Ratings = (props) => {
+  const { ratings } = props;
   const chunkedRatings = [];
-  for (let i = 0; i < ratingsData.length; i += 3) {
-    chunkedRatings.push(ratingsData.slice(i, i + 3));
+  const dataToUse = ratings || ratingsData;
+  for (let i = 0; i < dataToUse.length; i += 3) {
+    chunkedRatings.push(dataToUse.slice(i, i + 3));
   }
 
   return (
@@ -77,7 +80,7 @@ const Ratings = () => {
                       </div>
                     </div>
                   </div>
-                  <p className="rating-testimonial">{rating.testimonial}</p>
+                  <p className="rating-testimonial">{rating.testimonial || rating.feedback}</p>
                 </div>
               ))}
             </div>
