@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import '../styles/AddRating.css';
 
 const TripInfoCard = (props) => (
     <Card className="mb-4 shadow">
@@ -123,7 +124,7 @@ const AddRating = (props) => {
     };
 
     return (
-        <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh', padding: '20px 0' }}>
+        <div className="add-rating-page">
             <Container>
                 <Row className="justify-content-center">
                     <Col md={10} lg={8} xl={6}>

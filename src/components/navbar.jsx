@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaShieldAlt } from 'react-icons/fa';
+import DarkModeToggle from './DarkModeToggle';
 
 import "../styles/Navbar.css";
 
@@ -8,7 +9,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-white shadow-sm py-3 sticky-top">
+    <nav className="navbar navbar-expand-lg shadow-sm py-3 sticky-top">
       <div className="container">
 
         {/* Logo */}
@@ -65,13 +66,14 @@ export default function Navbar() {
             </ul>
 
             {/* Right-Aligned Buttons (work in both mobile & large) */}
-            <div className="d-flex gap-2 justify-content-end">
+            <div className="d-flex gap-3 justify-content-end align-items-center">
               <Link to="/signin" className="btn btn-outline-secondary rounded-pill px-3">
                 Login
               </Link>
               <Link to="/roles" className="btn btn-warning text-white rounded-pill px-3 fw-bold">
                 Book Now →
               </Link>
+              <DarkModeToggle />
             </div>
           </div>
         </div>

@@ -1,0 +1,25 @@
+.file-uploader {
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark .file-uploader {
+  background-color: var(--surface-dark);
+  border-color: var(--border-dark);
+  color: var(--text-secondary-dark);
+}
+
+body.dark .file-uploader .text-muted {
+  color: var(--text-secondary-dark) !important;
+} 

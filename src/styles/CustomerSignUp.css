@@ -13,3 +13,20 @@ h5, .h5 {
 h6, .h6 {
     font-size: clamp(1rem, 1.8vw, 1.3rem);
 }
+
+body.dark .form-control,
+body.dark .form-select {
+    background-color: var(--surface-dark);
+    border-color: var(--border-dark);
+    color: var(--text-primary-dark);
+}
+
+body.dark .form-label {
+    color: var(--text-primary-dark);
+}
+
+body.dark .input-group-text {
+    background-color: var(--surface-dark);
+    border-color: var(--border-dark);
+    color: var(--text-secondary-dark);
+}

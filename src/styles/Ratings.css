@@ -1,89 +1,113 @@
 .ratings-container {
-    padding: 50px;
-    text-align: center;
-    background-color: #f8f9fa;
-  }
-  
-  .ratings-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #343a40;
-  }
-  
-  .ratings-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-    color: #6c757d;
-  }
-  
-  .ratings-cards {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-  }
-  
-  .rating-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 320px;
-    text-align: left;
-    transition: box-shadow 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .rating-card-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .rating-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 15px;
-  }
-  
-  .rating-name {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin: 0;
-  }
-  
-  .rating-stars {
-    color: #ffc107;
-  }
-  
-  .star {
-    color: #e0e0e0;
-  }
-  
-  .star.filled {
-    color: #ffc107;
-  }
-  
-  .rating-testimonial {
-    font-size: 1rem;
-    color: #495057;
-    line-height: 1.5;
-  }
-  
-  .carousel-indicators {
-    display: none;
-  }
-  
-  .carousel-control-prev .bi-caret-left-fill,
-  .carousel-control-next .bi-caret-right-fill {
-    color: black !important;
-    font-size: 2.5rem !important;
-  }
-  
-  .carousel-item {
-    padding: 20px 0;
-  } 
+  padding: 50px;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+body.dark .ratings-container {
+  background-color: var(--bg-dark);
+}
+
+body.dark .ratings-title,
+body.dark .rating-name {
+  color: var(--text-primary-dark);
+}
+
+body.dark .ratings-subtitle,
+body.dark .rating-testimonial {
+  color: var(--text-secondary-dark);
+}
+
+body.dark .rating-card {
+  background: var(--surface-dark);
+  border-color: var(--border-dark);
+}
+
+body.dark .carousel-control-prev .bi-caret-left-fill,
+body.dark .carousel-control-next .bi-caret-right-fill {
+  color: var(--text-primary-dark) !important;
+}
+
+.ratings-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.ratings-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #6c757d;
+}
+
+.ratings-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.rating-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 320px;
+  text-align: left;
+  transition: box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rating-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.rating-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.rating-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.rating-stars {
+  color: #ffc107;
+}
+
+.star {
+  color: #e0e0e0;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.rating-testimonial {
+  font-size: 1rem;
+  color: #495057;
+  line-height: 1.5;
+}
+
+.carousel-indicators {
+  display: none;
+}
+
+.carousel-control-prev .bi-caret-left-fill,
+.carousel-control-next .bi-caret-right-fill {
+  color: black !important;
+  font-size: 2.5rem !important;
+}
+
+.carousel-item {
+  padding: 20px 0;
+} 

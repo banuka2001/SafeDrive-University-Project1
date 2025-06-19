@@ -25,7 +25,7 @@ export default function RoleSelection() {
           <img
             src={carIcon}
             alt="Car Icon"
-            className="img-fluid"
+            className="img-fluid car-icon-roles"
             style={{
               maxWidth: '100px',
             }}

@@ -1,3 +1,27 @@
+.navbar {
+  background-color: white;
+}
+
+body.dark .navbar {
+  background-color: var(--surface-dark) !important;
+  color: var(--text-primary-dark);
+}
+
+body.dark .navbar .navbar-nav .nav-link {
+  color: var(--text-primary-dark) !important;
+}
+
+body.dark .navbar .btn-outline-secondary {
+  color: var(--text-secondary-dark);
+  border-color: var(--text-secondary-dark);
+}
+
+body.dark .navbar .btn-outline-secondary:hover {
+  color: var(--bg-dark);
+  background-color: var(--text-secondary-dark);
+  border-color: var(--text-secondary-dark);
+}
+
 .border-remove {
     border: none !important; 
     background: none;

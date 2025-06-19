@@ -28,4 +28,25 @@
 
 .register-btn-hover:hover i {
   transform: translateX(20px);
+}
+
+body.dark .card {
+    background-color: var(--surface-dark);
+    border-color: var(--border-dark);
+    color: var(--text-primary-dark);
+}
+
+body.dark .card .text-muted,
+body.dark .text-muted {
+    color: var(--text-secondary-dark) !important;
+}
+
+body.dark h2, 
+body.dark h4, 
+body.dark h5 {
+    color: var(--text-primary-dark);
+}
+
+body.dark .text-black-50 {
+    color: rgba(255, 255, 255, 0.5) !important;
 } 

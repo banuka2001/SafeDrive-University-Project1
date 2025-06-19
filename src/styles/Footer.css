@@ -1,3 +1,24 @@
+.footer {
+    background-color: #f8f9fa;
+}
+
+body.dark .footer {
+    background-color: var(--surface-dark);
+    color: var(--text-secondary-dark);
+}
+
+body.dark .footer h5 {
+    color: var(--text-primary-dark);
+}
+
+body.dark .footer a {
+    color: var(--text-secondary-dark) !important;
+}
+
+body.dark .footer hr {
+    border-top: 1px solid var(--border-dark);
+}
+
 .payment-icon {
   height: 24px;
   margin-left: 10px;

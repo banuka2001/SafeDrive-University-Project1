@@ -4,7 +4,7 @@ import "../../styles/Buttons.css";
 
 const HeroSection = () => {
   return (
-    <section className="d-flex align-items-center mt-5 mt-sm-3 bg-white px-4 hero-section">
+    <section className="d-flex align-items-center mt-5 mt-sm-3 px-4 hero-section">
       <div className="container">
         <div className="row">
           <div className="col-lg-8">

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Form, Col, Image } from 'react-bootstrap';
 import { FaCamera } from 'react-icons/fa';
+import '../styles/FileUpload.css';
 
 const baseUploaderStyles = {
   border: '2px dashed #ddd',
@@ -12,7 +13,6 @@ const baseUploaderStyles = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#f8f9fa',
   position: 'relative',
   overflow: 'hidden',
 };
@@ -92,7 +92,7 @@ const FileUpload = ({
             {label}
           </Form.Label>
         )}
-        <div style={uploaderStyles} onClick={handleContainerClick}>
+        <div style={uploaderStyles} onClick={handleContainerClick} className="file-uploader">
           <Form.Control
             type="file"
             ref={fileInputRef}

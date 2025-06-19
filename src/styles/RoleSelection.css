@@ -21,3 +21,7 @@
     font-size: 1.4rem;
   }
 }
+
+body.dark .car-icon-roles {
+  filter: invert(1);
+}

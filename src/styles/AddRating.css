@@ -1,0 +1,9 @@
+.add-rating-page {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+body.dark .add-rating-page {
+  background-color: var(--bg-dark);
+} 

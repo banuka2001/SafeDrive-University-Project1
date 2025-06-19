@@ -11,7 +11,7 @@ import amexIcon from '../assets/american-express.svg';
 
 const Footer = () => {      
   return (
-    <footer className="bg-light text-muted pt-5 pb-4">
+    <footer className="text-muted pt-5 pb-4 footer">
       <div className="container text-center text-md-start">
         <div className="row text-center text-md-start">
 

@@ -30,3 +30,9 @@
 .style-btn:hover::before {
   transform: translateX(0);
 }
+
+body.dark .style-btn {
+  background: var(--surface-dark);
+  color: var(--text-primary-dark);
+  border: 1px solid var(--border-dark);
+}
