@@ -309,7 +309,7 @@ const MainSection = () => {
               <p className="fs-5 my-4">
                 Register our platform today and experience the convenience of safe rides home
               </p>
-              <a href="#" className="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold shadow-sm d-inline-flex align-items-center register-btn-hover">
+              <a href="/roles" className="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold shadow-sm d-inline-flex align-items-center register-btn-hover">
                 Register Now
                 <i className="bi bi-arrow-right-circle ms-3" style={{ fontSize: '2rem' }}></i>
               </a>
