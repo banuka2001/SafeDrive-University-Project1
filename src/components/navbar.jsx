@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { FaShieldAlt } from 'react-icons/fa';
 import DarkModeToggle from './DarkModeToggle';
+import { IoMdClose } from "react-icons/io";
+import { HiMenuAlt3 } from "react-icons/hi";
 
 import "../styles/Navbar.css";
 
@@ -14,8 +17,8 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link className="navbar-brand d-flex align-items-center" to="/">
-          <FaShieldAlt className="text-primary me-2" size={24} />
-          <span className="fw-bold">
+          <FaShieldAlt className="text-primary me-3" size={30} />
+          <span className="fw-bold fs-5">
             <span className="text-primary">Safe</span>
             <span className="text-warning">Drive</span>
           </span>
@@ -27,22 +30,22 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <svg width="30" height="30" viewBox="0 0 30 30">
-              <path stroke="#ffc107" strokeWidth="2" d="M2 7h28M8 15h14M1 23h30"/>
-
-
-
-                </svg>
+                  <span className={`toggler-icon-wrapper ${isOpen ? 'is-open' : ''}`}>
+                    {isOpen ? (
+                        <IoMdClose className="text-warning" size={30} />
+                      ) : (
+                        <HiMenuAlt3 className="text-warning" size={30} />
+                      )}
+                    </span>
               </button>
 
 
 
         {/* Collapsible content */}
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarContent">
-          <div className="w-100 d-flex flex-column flex-lg-row justify-content-lg-between align-items-lg-center">
 
             {/* Nav Links */}
-            <ul className="navbar-nav ms-5 mb-3 mb-lg-0 text-end text-lg-center">
+            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 text-end text-lg-center">
               <li className="nav-item">
                 <Link className="nav-link active fw-semibold" to="/" onClick={() => setIsOpen(false)}>Home</Link>
               </li>
@@ -66,7 +69,7 @@ export default function Navbar() {
             </ul>
 
             {/* Right-Aligned Buttons (work in both mobile & large) */}
-            <div className="d-flex gap-3 justify-content-end align-items-center">
+            <div className="d-flex gap-3 align-items-center mt-3 mt-lg-0 justify-content-end">
               <Link to="/signin" className="btn btn-outline-secondary rounded-pill px-3">
                 Login
               </Link>
@@ -75,7 +78,6 @@ export default function Navbar() {
               </Link>
               <DarkModeToggle />
             </div>
-          </div>
         </div>
       </div>
     </nav>

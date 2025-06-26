@@ -22,6 +22,20 @@ body.dark .navbar .btn-outline-secondary:hover {
   border-color: var(--text-secondary-dark);
 }
 
+
+  /* Toggler icon transition start */
+  
+  .toggler-icon-wrapper {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .toggler-icon-wrapper.is-open {
+      transform: rotate(180deg);
+  }
+  /* Toggler icon transition end */
+
+
 .border-remove {
     border: none !important; 
     background: none;

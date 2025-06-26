@@ -48,6 +48,10 @@ const SignIn = () => {
                     </div>
                     <button type="submit" className="btn btn-primary w-100 signin-btn">Sign In to Dashboard</button>
                     <hr className="my-4" />
+                    <div className="text-center mb-4">
+                        <p className="mb-2">Not a user ? Register here now</p>
+                        <Link to="/roles" className="btn btn-secondary w-100 register-btn">Register now</Link>
+                    </div>
                     <div className="text-center">
                         <p className="text-muted">Need help? Contact driver support</p>
                         <div>
