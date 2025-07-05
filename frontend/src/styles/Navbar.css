@@ -1,5 +1,5 @@
 .navbar {
-  background-color: white;
+  background-color: var(--white);
 }
 
 body.dark .navbar {
@@ -27,7 +27,7 @@ body.dark .navbar .btn-outline-secondary:hover {
   
   .toggler-icon-wrapper {
     display: inline-block;
-    transition: transform 0.3s ease-in-out;
+    transition: transform var(--transition-normal) var(--transition-ease);
   }
   
   .toggler-icon-wrapper.is-open {

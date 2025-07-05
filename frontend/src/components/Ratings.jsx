@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../styles/Ratings.css';
 
 export const ratingsData = [

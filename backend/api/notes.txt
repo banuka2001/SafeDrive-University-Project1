@@ -1,0 +1,22 @@
+How file uploads from signups are handle here.
+
+To handle file uploads during signup, I went with the standard and most efficient method — keeping things clean and simple without storing the actual images in the database. Here’s how I set it up:
+
+Saving the File to the Server
+When a user uploads an image (like a vehicle photo), it gets handled by either customer_signup.php or driver_signup.php. That PHP script takes the file and saves it to a folder on the server — for example, backend/uploads/customer/ or backend/uploads/driver/. I used PHP’s move_uploaded_file() function to handle that.
+
+Saving the File Path in the Database
+Instead of saving the actual image in the database, I just store the file path as a string. For example, in the customers table, the vehicle_photo_front column will hold a path like:
+../uploads/customer/60c7c0f1b2e3a-front-view.jpg
+The column is just a VARCHAR(255), enough to store the relative file path.
+
+How It All Works Together
+When someone signs up and uploads an image, it’s saved in a dedicated folder.
+
+Then the PHP script inserts the file path into the corresponding column in the database.
+
+Later, when displaying that image (like in a profile or listing), I just fetch the file path from the database and use it directly in an <img> tag like this:
+<img src="http://localhost/SafeDrive-University-Project1/backend/uploads/customer/unique_id-car_front.jpg" />
+
+Why I Didn’t Use Google Drive or Cloud Storage
+I considered external storage options like Google Drive or Amazon S3, which are great for large-scale systems. But they come with more overhead — API authentication, SDKs, file permissions, and so on. For this project, it would have been overkill. So I kept it simple and efficient by sticking to local file storage, which works perfectly for what we need right now.

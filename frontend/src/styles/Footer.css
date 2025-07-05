@@ -1,5 +1,5 @@
 .footer {
-    background-color: #f8f9fa;
+    background-color: var(--light-gray);
 }
 
 body.dark .footer {
@@ -21,7 +21,7 @@ body.dark .footer hr {
 
 .payment-icon {
   height: 24px;
-  margin-left: 10px;
+  margin-left: var(--spacing-md);
   opacity: 0.6;
 }
 

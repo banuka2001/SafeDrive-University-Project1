@@ -1,0 +1,63 @@
+-- 1. Parent: Create `users` first (referenced by many)
+CREATE TABLE `users` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `email_or_phone_number` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `is_verified` TINYINT(1) NOT NULL DEFAULT '0',
+  `registration_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email_or_phone_number_UNIQUE` (`email_or_phone_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 2. Parent: Create `roles` (referenced by user_roles)
+CREATE TABLE `roles` (
+  `role_id` INT NOT NULL AUTO_INCREMENT,
+  `role_name` VARCHAR(50) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`role_id`),
+  UNIQUE KEY `role_name_UNIQUE` (`role_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 3. Join Table: Create `user_roles` (depends on users and roles)
+CREATE TABLE `user_roles` (
+  `user_id` INT NOT NULL,
+  `role_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `role_id`),
+  KEY `fk_user_roles_roles_idx` (`role_id`),
+  CONSTRAINT `fk_user_roles_roles` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_roles_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 4. Child: Create `customers` (depends on users)
+CREATE TABLE `customers` (
+  `customer_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `first_name` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `profile_picture_url` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`customer_id`),
+  KEY `fk_customers_users_idx` (`user_id`),
+  CONSTRAINT `fk_customers_users` FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 5. Child: Create `drivers` (depends on users)
+CREATE TABLE `drivers` (
+  `driver_id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `first_name` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `experience_years` INT NOT NULL,
+  `profile_picture_url` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `is_available` TINYINT(1) NOT NULL DEFAULT '1',
+  `current_location` VARCHAR(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `license_front_url` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `license_back_url` VARCHAR(255) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`driver_id`),
+  KEY `fk_drivers_users_idx` (`user_id`),
+  CONSTRAINT `fk_drivers_users` FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

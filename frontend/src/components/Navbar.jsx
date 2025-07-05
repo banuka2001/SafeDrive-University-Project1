@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { FaShieldAlt } from 'react-icons/fa';
 import DarkModeToggle from './DarkModeToggle';
@@ -10,6 +10,69 @@ import "../styles/Navbar.css";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRoles, setUserRoles] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const response = await fetch('http://localhost/SafeDrive-University-Project1/backend/api/check_session.php', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setIsAuthenticated(true);
+          setUserRoles(data.roles || []);
+        } else {
+          setIsAuthenticated(false);
+          setUserRoles([]);
+        }
+      } catch (error) {
+        console.error('Session check failed:', error);
+        setIsAuthenticated(false);
+        setUserRoles([]);
+      }
+    };
+
+    checkSession();
+  }, [location]);
+
+  const handleLogout = async () => {
+    try {
+      // Call logout endpoint to clear session
+      await fetch('http://localhost/SafeDrive-University-Project1/backend/api/logout.php', {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+    
+    setIsAuthenticated(false);
+    setUserRoles([]);
+    setIsOpen(false);
+    navigate('/signin');
+  };
+
+  const handleBookNow = () => {
+    if (isAuthenticated && userRoles.length > 0) {
+      // User is logged in - navigate to their dashboard
+      if (userRoles.length === 1) {
+        navigate(`/${userRoles[0]}-dashboard`);
+      } else {
+        // Multiple roles - navigate to role selection
+        navigate('/role-selection', { state: { roles: userRoles } });
+      }
+    } else {
+      // User not logged in - go to registration
+      navigate('/register');
+    }
+    setIsOpen(false);
+  };
 
   return (
     <nav className="navbar navbar-expand-lg shadow-sm py-3 sticky-top">
@@ -70,13 +133,24 @@ export default function Navbar() {
 
             {/* Right-Aligned Buttons (work in both mobile & large) */}
             <div className="d-flex gap-3 align-items-center mt-3 mt-lg-0 justify-content-end">
-              <Link to="/signin" className="btn btn-outline-secondary rounded-pill px-3">
-                Login
-              </Link>
-              <Link to="/roles" className="btn btn-warning text-white rounded-pill px-3 fw-bold">
-                Book Now →
-              </Link>
-              <DarkModeToggle />
+              {isAuthenticated ? (
+                <>
+                  <button onClick={handleLogout} className="btn btn-outline-secondary rounded-pill px-3">
+                    Logout
+                  </button>
+                  <DarkModeToggle />
+                </>
+              ) : (
+                <>
+                  <Link to="/signin" className="btn btn-outline-secondary rounded-pill px-3" onClick={() => setIsOpen(false)}>
+                    Login
+                  </Link>
+                  <button onClick={handleBookNow} className="btn btn-warning text-white rounded-pill px-3 fw-bold">
+                    {isAuthenticated ? 'My Dashboard' : 'Book Now →'}
+                  </button>
+                  <DarkModeToggle />
+                </>
+              )}
             </div>
         </div>
       </div>

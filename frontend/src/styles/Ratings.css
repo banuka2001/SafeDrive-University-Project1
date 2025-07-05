@@ -1,7 +1,7 @@
 .ratings-container {
-  padding: 50px;
+  padding: var(--spacing-3xl);
   text-align: center;
-  background-color: #f8f9fa;
+  background-color: var(--light-gray);
 }
 
 body.dark .ratings-container {
@@ -30,32 +30,32 @@ body.dark .carousel-control-next .bi-caret-right-fill {
 
 .ratings-title {
   font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #343a40;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-dark);
 }
 
 .ratings-subtitle {
-  font-size: 1.1rem;
-  margin-bottom: 40px;
-  color: #6c757d;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-3xl);
+  color: var(--text-muted);
 }
 
 .ratings-cards {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: var(--spacing-3xl);
   flex-wrap: wrap;
 }
 
 .rating-card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  background: var(--white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-light);
+  padding: var(--spacing-xl);
   max-width: 320px;
   text-align: left;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow var(--transition-fast) var(--transition-ease);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -64,24 +64,24 @@ body.dark .carousel-control-next .bi-caret-right-fill {
 .rating-card-header {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: var(--spacing-xl);
 }
 
 .rating-avatar {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  margin-right: 15px;
+  border-radius: var(--border-radius-circle);
+  margin-right: var(--spacing-xl);
 }
 
 .rating-name {
-  font-weight: bold;
-  font-size: 1.1rem;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
   margin: 0;
 }
 
 .rating-stars {
-  color: #ffc107;
+  color: var(--primary-yellow);
 }
 
 .star {
@@ -89,12 +89,12 @@ body.dark .carousel-control-next .bi-caret-right-fill {
 }
 
 .star.filled {
-  color: #ffc107;
+  color: var(--primary-yellow);
 }
 
 .rating-testimonial {
-  font-size: 1rem;
-  color: #495057;
+  font-size: var(--font-size-md);
+  color: var(--text-dark);
   line-height: 1.5;
 }
 
@@ -109,5 +109,5 @@ body.dark .carousel-control-next .bi-caret-right-fill {
 }
 
 .carousel-item {
-  padding: 20px 0;
+  padding: var(--spacing-xl) 0;
 } 

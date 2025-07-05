@@ -1,7 +1,7 @@
 .add-rating-page {
-  background-color: #f8f9fa;
+  background-color: var(--light-gray);
   min-height: 100vh;
-  padding: 20px 0;
+  padding: var(--spacing-xl) 0;
 }
 
 body.dark .add-rating-page {
