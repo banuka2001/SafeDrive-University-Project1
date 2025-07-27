@@ -1,0 +1,194 @@
+.driver-profile-container {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: left;
+}
+.driver-profile-wrapper {
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+.driver-profile-photo-wrapper {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.driver-profile-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.driver-camera-icon-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.driver-error-message {
+  color: red;
+  background-color: #ffe5e5;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  margin: 20px auto;
+  padding: 10px;
+}
+.driver-edit-form {
+  margin: 20px auto;
+  padding: 2rem;
+  text-align: left;
+}
+
+.driver-profile-wrapper .driver-edit-form input,
+.driver-profile-wrapper .driver-edit-form textarea {
+  width: 100%;
+  min-width: 50%;
+  margin: 0 auto 12px;
+  display: block;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  color: black;
+  background-color: white;
+  align-items: center;
+}
+
+p{
+    color: black;
+}
+
+
+.driver-profile-container input:focus,
+.driver-profile-container textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  color: black;
+}
+
+.driver-edit-button,
+.driver-save-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  }
+
+.driver-edit-button:hover,
+.driver-save-button:hover {
+  background-color: #0056b3;
+}
+
+.driver-button-right {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+  
+  .driver-back-button{
+    background-color:black;
+    display: block;
+    padding: 8px 20px;
+    min-width: 100px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+    color:white;
+    margin-left: 0;
+    align-self: flex-start;
+  }
+
+  .driver-rating-row {
+    display: flex;
+    justify-content:left;
+    gap: 8px; 
+  
+  }
+
+  .driver-license-photo {
+  width: 100px;
+  height: auto;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.driver-license-photo-upload input[type="file"] {
+  margin-top: 5px;
+}
+
+.driver-back-arrow-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.driver-back-arrow-btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #222;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+.driver-back-arrow-btn:hover {
+  color: #007bff;
+}
+
+@media (max-width: 600px) {
+   .driver-profile-wrapper {
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .driver-back-button {
+    min-width: 80px;
+    font-size: 12px;
+    width: auto;
+    margin-left: 0;
+  }
+}
+
+
+
+body.dark .driver-back-arrow-btn {
+  color: var(--primary-yellow);
+}
+
+body.dark .driver-back-arrow-btn:hover {
+  color: #007bff;
+}
+
+
+  

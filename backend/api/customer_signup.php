@@ -1,5 +1,5 @@
 <?php
-$allowed_origin = 'http://localhost:5173';
+    $allowed_origin = 'http://localhost:5173';
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin === $allowed_origin) {
     header("Access-Control-Allow-Origin: $origin");
@@ -17,6 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
+
+
+
+
+
+// photo save location
+// profile photos will go to backend/uploads/customer_profiles/ and vehicle photos will go to backend/uploads/customer/.
+
+
+
 
 // Enable error reporting
 ini_set('display_errors', 1);
@@ -60,33 +70,67 @@ $first_name = $_POST['firstName'] ?? '';
 $last_name = $_POST['lastName'] ?? '';
 $email_phone = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
-$profile_photo = $_FILES['profilePhoto'] ?? null;
+$phone = $_POST['phone'] ?? '';
+$vehicle_number = $_POST['vehicleNumber'] ?? '';
 
-if (empty($first_name) || empty($last_name) || empty($email_phone) || empty($password)) {
+// Handle multiple file uploads
+$profile_photo = $_FILES['profilePhoto'] ?? null;
+$vehicle_front = $_FILES['vehicleFront'] ?? null;
+$vehicle_back = $_FILES['vehicleBack'] ?? null;
+$vehicle_side = $_FILES['vehicleSide'] ?? null;
+
+if (empty($first_name) || empty($last_name) || empty($email_phone) || empty($password) || empty($phone) || empty($vehicle_number)) {
     http_response_code(400);
     echo json_encode(['error' => 'All text fields are required.']);
     exit();
 }
 
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-$uploaded_path = '';
 
-// Handle the single file upload
-$upload_dir = '../uploads/customer_profiles/';
-if (!is_dir($upload_dir)) {
-    mkdir($upload_dir, 0777, true);
+$uploaded_paths = [];
+
+// Handle profile photo upload
+$profile_upload_dir = '../uploads/customer_profiles/';
+if (!is_dir($profile_upload_dir)) {
+    mkdir($profile_upload_dir, 0777, true);
 }
 
 if ($profile_photo && $profile_photo['error'] == UPLOAD_ERR_OK) {
     $file_name = uniqid() . '-' . basename($profile_photo['name']);
-    $target_path = $upload_dir . $file_name;
+    $target_path = $profile_upload_dir . $file_name;
     if (move_uploaded_file($profile_photo['tmp_name'], $target_path)) {
-        $uploaded_path = $target_path;
+        $uploaded_paths['profile_picture_url'] = $target_path;
     } else {
         throw new Exception("Failed to upload profile photo.");
     }
 } else {
     throw new Exception("Profile photo is required.");
+}
+
+// Handle vehicle photos upload
+$vehicle_upload_dir = '../uploads/customer/';
+if (!is_dir($vehicle_upload_dir)) {
+    mkdir($vehicle_upload_dir, 0777, true);
+}
+
+$vehicle_files_to_upload = [
+    'vehicle_front_url' => $vehicle_front,
+    'vehicle_back_url' => $vehicle_back,
+    'vehicle_side_url' => $vehicle_side
+];
+
+foreach ($vehicle_files_to_upload as $key => $file) {
+    if ($file && $file['error'] == UPLOAD_ERR_OK) {
+        $file_name = uniqid() . '-' . basename($file['name']);
+        $target_path = $vehicle_upload_dir . $file_name;
+        if (move_uploaded_file($file['tmp_name'], $target_path)) {
+            $uploaded_paths[$key] = $target_path;
+        } else {
+            throw new Exception("Failed to upload file for $key.");
+        }
+    } else {
+        throw new Exception("File upload is required for $key.");
+    }
 }
 
 $conn->begin_transaction();
@@ -121,8 +165,19 @@ try {
     $stmt_customer_check->close();
 
     // Create customer profile (this automatically gives them the 'customer' role)
-    $stmt_customer = $conn->prepare("INSERT INTO customers (user_id, first_name, last_name, profile_picture_url) VALUES (?, ?, ?, ?)");
-    $stmt_customer->bind_param("isss", $user_id, $first_name, $last_name, $uploaded_path);
+    $stmt_customer = $conn->prepare("INSERT INTO customers (user_id, first_name, last_name, phone_number, profile_picture_url, vehicle_number, vehicle_front_url, vehicle_back_url, vehicle_side_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt_customer->bind_param(
+        "issssssss",
+        $user_id,
+        $first_name,
+        $last_name,
+        $phone,
+        $uploaded_paths['profile_picture_url'],
+        $vehicle_number,
+        $uploaded_paths['vehicle_front_url'],
+        $uploaded_paths['vehicle_back_url'],
+        $uploaded_paths['vehicle_side_url']
+    );
     $stmt_customer->execute();
 
     if ($stmt_customer->affected_rows > 0) {

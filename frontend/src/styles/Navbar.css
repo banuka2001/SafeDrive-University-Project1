@@ -1,5 +1,25 @@
 .navbar {
   background-color: var(--white);
+  min-height: 56px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.Navbar .container {
+ 
+}
+
+.navbar  .Navbar-container {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand, .navbar-nav {
+  align-items: center;
+  display: flex;
 }
 
 body.dark .navbar {
@@ -40,4 +60,12 @@ body.dark .navbar .btn-outline-secondary:hover {
     border: none !important; 
     background: none;
     outline: none; 
+}
+
+/* Slimmer navbar container */
+.navbar .container,
+.Navbar-container.container {
+  min-height: 36px !important;
+  padding-top: 0.1rem !important;
+  padding-bottom: 0.1rem !important;
 }

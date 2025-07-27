@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../styles/MainSection.css";
+import HowItWorksSection from './HowItWorksSection';
 
 const MainSection = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -174,7 +175,7 @@ const MainSection = () => {
 
         <div className="row text-center mt-5 mb-5">
           <div className="col">
-            <h2 className="fw-bold display-5">
+            <h2 className="fw-bold display-5 mt-5">
               What is <span style={{ color: '#0D6EFD' }}>Safe</span>
               <span style={{ color: '#FFC107' }}>Drive</span>?
             </h2>
@@ -272,73 +273,7 @@ const MainSection = () => {
         </div>
 
         {/* How It Works Section */}
-        <div className="row mt-5 pt-5">
-          <div className="col-12 text-center mb-5">
-            <h2 className="fw-bold display-5">How It Works</h2>
-            <p className="fs-4 text-muted">
-              Simple steps to get you home safely
-            </p>
-          </div>
-        </div>
-
-        {/* Customer Steps */}
-        <div className="row mb-5 align-items-center justify-content-center">
-          <div className="col-12">
-            <h3 className="text-center mb-5">For Customers</h3>
-            <p className="text-center text-muted mb-5">Get home safely in your own vehicle</p>
-          </div>
-          {customerSteps.map((step, index) => (
-            <React.Fragment key={index}>
-              <div className="col-lg-3 col-md-6 mb-4 d-flex flex-column align-items-center">
-                <div className="text-center w-100">
-                  <div 
-                    className="step-icon-wrapper mx-auto mb-3"
-                    style={{ backgroundColor: step.bgColor }}
-                  >
-                    <i className={`${step.icon} text-white`} style={{ fontSize: '2rem' }}></i>
-                  </div>
-                  <h5 className="fw-bold mb-2">{step.title}</h5>
-                  <p className="text-muted">{step.description}</p>
-                </div>
-              </div>
-              {/* Add arrow between steps, but not after the last step */}
-              {index < customerSteps.length - 1 && (
-                <div className="col-lg-1 d-none d-lg-flex justify-content-center align-items-center">
-                  <i className="bi bi-arrow-right" style={{ fontSize: '2rem', color: '#222' }}></i>
-                </div>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-
-        {/* Driver Steps */}
-        <div className="row mb-5 align-items-center justify-content-center">
-        <div className="col-12">
-            <h3 className="text-center mb-5">For Drivers</h3>
-          </div>
-          {driverSteps.map((step, index) => (
-              <React.Fragment key={index}>
-              <div className="col-lg-3 col-md-6 mb-4 d-flex flex-column align-items-center">
-              <div className="text-center w-100">
-                <div 
-                  className="step-icon-wrapper mx-auto mb-3"
-                  style={{ backgroundColor: step.bgColor }}
-                >
-                  <i className={`${step.icon} text-white`} style={{ fontSize: '2rem' }}></i>
-                </div>
-                <h5 className="fw-bold mb-2">{step.title}</h5>
-                <p className="text-muted">{step.description}</p>
-              </div>
-            </div>
-            {/* Add arrow between steps, but not after the last step */}
-            {index < driverSteps.length - 1 && (
-                <div className="col-lg-1 d-none d-lg-flex justify-content-center align-items-center">
-                  <i className="bi bi-arrow-right" style={{ fontSize: '2rem', color: '#222' }}></i>
-                </div>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
+        <HowItWorksSection />
 
         {/* CTA Section */}
         <div className="row mt-5 pt-5">
@@ -362,5 +297,4 @@ const MainSection = () => {
     </section>
   );
 };
-
 export default MainSection; 

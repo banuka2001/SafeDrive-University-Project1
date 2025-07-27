@@ -59,16 +59,28 @@ $first_name = $_POST['firstName'] ?? '';
 $last_name = $_POST['lastName'] ?? '';
 $email_phone = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
+$phone = $_POST['phone'] ?? '';
 $experience_years = $_POST['experienceYears'] ?? 0;
+$age = $_POST['age'] ?? 0;
+$nearest_town = $_POST['nearestTown'] ?? '';
 
 // Handle multiple file uploads
 $profile_photo = $_FILES['profilePhoto'] ?? null;
 $license_front = $_FILES['licenseFront'] ?? null;
 $license_back = $_FILES['licenseBack'] ?? null;
 
-if (empty($first_name) || empty($last_name) || empty($email_phone) || empty($password)) {
+if (empty($first_name) || empty($last_name) || empty($email_phone) || empty($password) || empty($phone)) {
     http_response_code(400);
     echo json_encode(['error' => 'All text fields are required.']);
+    exit();
+}
+
+$is_email = filter_var($email_phone, FILTER_VALIDATE_EMAIL);
+$is_phone = preg_match('/^\+?(\d{1,3})?[-. ]?(\(?\d{3}\)?[-. ]?)?(\d{3}[-. ]?)?(\d{4})$/', $email_phone);
+
+if (!$is_email && !$is_phone) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid email or phone number format.']);
     exit();
 }
 
@@ -135,17 +147,20 @@ try {
 
     // Create driver profile (this automatically gives them the 'driver' role)
     $stmt_driver = $conn->prepare(
-        "INSERT INTO drivers (user_id, first_name, last_name, experience_years, profile_picture_url, license_front_url, license_back_url) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        "INSERT INTO drivers (user_id, first_name, last_name, age, experience_years, phone_number, profile_picture_url, license_front_url, license_back_url, nearest_town) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
     $stmt_driver->bind_param(
-        "ississs",
+        "issiisssss",
         $user_id,
         $first_name,
         $last_name,
+        $age,
         $experience_years,
+        $phone,
         $uploaded_paths['profile_picture_url'],
         $uploaded_paths['license_front_url'],
-        $uploaded_paths['license_back_url']
+        $uploaded_paths['license_back_url'],
+        $nearest_town
     );
     $stmt_driver->execute();
 

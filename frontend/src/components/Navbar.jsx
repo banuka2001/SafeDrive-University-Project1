@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-
-import { FaShieldAlt } from 'react-icons/fa';
+import { Dropdown } from 'react-bootstrap';
+import { FaShieldAlt, FaBell } from 'react-icons/fa';
 import DarkModeToggle from './DarkModeToggle';
 import { IoMdClose } from "react-icons/io";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -12,6 +12,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRoles, setUserRoles] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -40,6 +42,45 @@ export default function Navbar() {
 
     checkSession();
   }, [location]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const fetchNotifications = async () => {
+        try {
+          const response = await fetch('http://localhost/SafeDrive-University-Project1/backend/api/get_notifications.php', {
+            credentials: 'include'
+          });
+          const data = await response.json();
+          setNotifications(data);
+        } catch (error) {
+          console.error('Error fetching notifications:', error);
+        }
+      };
+      fetchNotifications();
+    }
+  }, [isAuthenticated]);
+
+  const handleNotificationToggle = async (show) => {
+    setShowNotifications(show);
+    if (show && isAuthenticated) {
+      // Mark notifications as read when dropdown is opened
+      try {
+        await fetch('http://localhost/SafeDrive-University-Project1/backend/api/mark_notifications_read.php', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        
+        // Refresh notifications to update the count
+        const response = await fetch('http://localhost/SafeDrive-University-Project1/backend/api/get_notifications.php', {
+          credentials: 'include'
+        });
+        const data = await response.json();
+        setNotifications(data);
+      } catch (error) {
+        console.error('Error marking notifications as read:', error);
+      }
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -74,10 +115,11 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
-  return (
-    <nav className="navbar navbar-expand-lg shadow-sm py-3 sticky-top">
-      <div className="container">
+  const unreadCount = notifications.filter(n => !n.is_read).length;
 
+  return (
+    <nav className="navbar navbar-expand-lg shadow-sm sticky-top">
+      <div className="Navbar-container container"> 
         {/* Logo */}
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <FaShieldAlt className="text-primary me-3" size={30} />
@@ -87,71 +129,73 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Toggler */}
-             <button
-                className="navbar-toggler border-remove"
-                type="button"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                  <span className={`toggler-icon-wrapper ${isOpen ? 'is-open' : ''}`}>
-                    {isOpen ? (
-                        <IoMdClose className="text-warning" size={30} />
-                      ) : (
-                        <HiMenuAlt3 className="text-warning" size={30} />
-                      )}
-                    </span>
-              </button>
+        {/* Toggler - only visible on small screens */}
+        <button
+          className="navbar-toggler border-remove"
+          type="button"
+          aria-label="Toggle navigation"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className={`toggler-icon-wrapper ${isOpen ? 'is-open' : ''}`}>
+            {isOpen ? (
+              <IoMdClose className="text-warning" size={30} />
+            ) : (
+              <HiMenuAlt3 className="text-warning" size={30} />
+            )}
+          </span>
+        </button>
 
-
-
-        {/* Collapsible content */}
+        {/* Collapsible content - responsive */}
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarContent">
+          {/* Nav Links */}
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0 text-end text-lg-center">
+            <li className="nav-item">
+              <Link className="nav-link" to="/how-it-works" onClick={() => setIsOpen(false)}>How It Works</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/aboutus" onClick={() => setIsOpen(false)}>About Us</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact" onClick={() => setIsOpen(false)}>Contact Us</Link>
+            </li>
+          </ul>
 
-            {/* Nav Links */}
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0 text-end text-lg-center">
-              <li className="nav-item">
-                <Link className="nav-link active fw-semibold" to="/" onClick={() => setIsOpen(false)}>Home</Link>
-              </li>
-
-              {/* Test case for Rate Trip */}
-              <li className="nav-item">
-                <Link className="nav-link" to="/rate-trip" onClick={() => setIsOpen(false)}>Rate Trip</Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#about" onClick={() => setIsOpen(false)}>About</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#features" onClick={() => setIsOpen(false)}>Features</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#how" onClick={() => setIsOpen(false)}>How It Works</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
-              </li>
-            </ul>
-
-            {/* Right-Aligned Buttons (work in both mobile & large) */}
-            <div className="d-flex gap-3 align-items-center mt-3 mt-lg-0 justify-content-end">
-              {isAuthenticated ? (
-                <>
-                  <button onClick={handleLogout} className="btn btn-outline-secondary rounded-pill px-3">
-                    Logout
-                  </button>
-                  <DarkModeToggle />
-                </>
-              ) : (
-                <>
-                  <Link to="/signin" className="btn btn-outline-secondary rounded-pill px-3" onClick={() => setIsOpen(false)}>
-                    Login
-                  </Link>
-                  <button onClick={handleBookNow} className="btn btn-warning text-white rounded-pill px-3 fw-bold">
-                    {isAuthenticated ? 'My Dashboard' : 'Book Now →'}
-                  </button>
-                  <DarkModeToggle />
-                </>
-              )}
-            </div>
+          {/* Right-Aligned Buttons (work in both mobile & large) */}
+          <div className="d-flex gap-3 align-items-center mt-3 mt-lg-0 justify-content-end">
+            {isAuthenticated ? (
+              <>
+                <Dropdown show={showNotifications} onToggle={handleNotificationToggle}>
+                  <Dropdown.Toggle variant="transparent" id="dropdown-notifications">
+                    <FaBell />
+                    {unreadCount > 0 && <span className="badge bg-danger">{unreadCount}</span>}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {notifications.length > 0 ? (
+                      notifications.map(notification => (
+                        <Dropdown.Item key={notification.id}>{notification.message}</Dropdown.Item>
+                      ))
+                    ) : (
+                      <Dropdown.Item>No new notifications</Dropdown.Item>
+                    )}
+                  </Dropdown.Menu>
+                </Dropdown>
+                <button onClick={handleLogout} className="btn btn-outline-secondary rounded-pill px-3">
+                  Logout
+                </button>
+                <DarkModeToggle />
+              </>
+            ) : (
+              <>
+                <Link to="/signin" className="btn btn-outline-secondary rounded-pill px-3" onClick={() => setIsOpen(false)}>
+                  Login
+                </Link>
+                <button onClick={handleBookNow} className="btn btn-warning text-white rounded-pill px-3 fw-bold">
+                  Register
+                </button>
+                <DarkModeToggle />
+              </>
+            )}
+          </div>
         </div>
       </div>
     </nav>

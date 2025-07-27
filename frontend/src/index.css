@@ -1,6 +1,2 @@
-/* Import global styles */
-@import './styles/partials/_global.css';
-
-/* ===== APP-SPECIFIC STYLES ===== */
-
-/* Additional app-specific styles can be added here */
+@import url('./styles/partials/_variables.css');
+@import url('./styles/partials/_global.css');

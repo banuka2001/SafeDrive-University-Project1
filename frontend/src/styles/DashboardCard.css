@@ -1,0 +1,171 @@
+.dashboard-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  padding: 30px;
+  justify-content: center;
+  width:100%;
+  position:relative;
+  margin: 0 auto;
+  
+}
+
+.dashboard-card-card {
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  width: 100%; /* Let Bootstrap col-* handle width */
+  max-width: 350px;
+  min-width: 220px;
+  height: 250px;
+  margin: 0 auto;
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+}
+
+.dashboard-card-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  padding: 12px 0 0 0;
+  text-align: center;
+  margin:0;
+  
+}
+
+.dashboard-card-image{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 10px;
+ 
+}
+
+.dashboard-card-hamburger-icon {
+  font-size: 28px;
+  position: fixed;
+  top: 55px;
+  right: 30px;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.dashboard-card-switch{
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.dashboard-card-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.dashboard-card-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #f44336;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+.dashboard-card-slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+.dashboard-card-switch input:checked + .dashboard-card-slider {
+  background-color: #4caf50;
+}
+
+.dashboard-card-switch input:checked + .dashboard-card-slider::before {
+  transform: translateX(26px);
+}
+
+.dashboard-card-switch input:focus + .dashboard-card-slider {
+  box-shadow: 0 0 1px #4caf50;
+}
+
+.dashboard-card-availability-switch-wrapper {
+  position: absolute;
+  top: 100px;    
+  right: 155px;  
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  z-index: 1000; 
+}
+
+body.dark .dashboard-card-card {
+  background: var(--surface-dark);
+  color: var(--text-primary-dark) !important;
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 4px 12px var(--shadow-dark);
+}
+
+
+body.dark .dashboard-card-card:hover {
+  box-shadow: 0 6px 16px var(--shadow-dark);
+}
+
+body.dark .dashboard-card-image {
+  background: var(--surface-dark);
+  border: 1px solid var(--border-dark);
+}
+
+@media (max-width: 1200px) {
+  .dashboard-card-card {
+    max-width: 100%;
+    height: 220px;
+  }
+}
+@media (max-width: 992px) {
+  .dashboard-card-card {
+    max-width: 100%;
+    height: 200px;
+  }
+}
+@media (max-width: 768px) {
+  .dashboard-card-card {
+    max-width: 100%;
+    height: 180px;
+  }
+}
+@media (max-width: 576px) {
+  .dashboard-card-card {
+    max-width: 100%;
+    min-width: 100%;
+    height: 160px;
+    padding: 10px;
+  }
+  .dashboard-card-image {
+    height: 90px;
+  }
+}
+  

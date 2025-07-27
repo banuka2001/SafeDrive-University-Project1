@@ -51,7 +51,7 @@
 
 body.dark .book-driver-btn {
   background-color: var(--primary-yellow);
-  color: var(--bg-dark) !important;
+  color: #000 !important; /* Set text color to black in dark mode */
   border-color: var(--primary-yellow);
 }
 
@@ -68,6 +68,11 @@ body.dark .style-btn-outline:focus-visible {
   border-color: var(--text-primary-dark) !important;
 }
 
+body.dark .style-btn-outline:not(:hover):not(:focus-visible) {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
 .book-driver-btn:hover,
 .book-driver-btn:focus-visible {
   background-color: var(--primary-blue) !important;
@@ -79,6 +84,6 @@ body.dark .style-btn-outline:focus-visible {
 body.dark .book-driver-btn:hover,
 body.dark .book-driver-btn:focus-visible {
   background-color: var(--primary-yellow) !important;
-  color: var(--bg-dark) !important;
+  color: #000 !important;
   border-color: var(--primary-yellow) !important;
 }

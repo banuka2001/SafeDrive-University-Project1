@@ -3,20 +3,28 @@
 }
 
 body.dark .footer {
-    background-color: var(--surface-dark);
-    color: var(--text-secondary-dark);
+    background-color: #1a202c;
+    color: #a0aec0; 
+    border-top: 1px solid #4a5568; 
+}
+
+body.dark .footer p,
+body.dark .footer a,
+body.dark .footer .text-muted {
+    color: #a0aec0 !important; /* --text-secondary-dark */
+}
+
+body.dark .footer a:hover {
+    color: #e2e8f0 !important; /* --text-primary-dark */
 }
 
 body.dark .footer h5 {
-    color: var(--text-primary-dark);
+    color: #e2e8f0; /* --text-primary-dark */
 }
 
-body.dark .footer a {
-    color: var(--text-secondary-dark) !important;
-}
 
 body.dark .footer hr {
-    border-top: 1px solid var(--border-dark);
+    border-top: 1px solid #4a5568; /* --border-dark */
 }
 
 .payment-icon {
@@ -31,4 +39,17 @@ body.dark .footer hr {
 
 .payment-icon.colored {
   filter: grayscale(10%);
+} 
+
+.footer-contact-icon {
+  font-size: 28px;
+  min-width: 28px;
+  height: 28px;
+  width: 28px;
+  display: inline-block;
+  color: #c9a100; /* darker yellow for light mode */
+} 
+
+body.dark .footer-contact-icon {
+  color: #ffe066; /* brighter yellow for dark mode */
 } 

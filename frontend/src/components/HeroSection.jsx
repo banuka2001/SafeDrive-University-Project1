@@ -53,7 +53,7 @@ const HeroSection = () => {
   return (
     <section className="d-flex align-items-center mt-5 mt-sm-3 px-4 hero-section">
       <div className="container">
-        <div className="row justify-content-center">
+        <div className="row justify-content-center"> 
           <div className="col-lg-10 text-center">
             <h1 className="fw-bold display-5">
               Prevent drunk driving <br />
@@ -68,9 +68,9 @@ const HeroSection = () => {
                 onClick={handleBookDriver}
                 className="btn shadow-sm px-4 py-3 fw-medium book-btn text-primary w-75 w-sm-auto style-btn book-driver-btn"
               >
-                {isAuthenticated ? 'My Dashboard' : 'Book a Driver'}
+                {isAuthenticated ? 'My Dashboard' : 'Register Now'}
               </button>
-              <Link to="/learn-more" className="btn shadow-sm px-4 py-3 fw-medium d-flex align-items-center justify-content-center gap-2 text-secondary w-75 w-sm-auto style-btn style-btn-outline">
+              <Link to="/how-it-works" className="btn shadow-sm px-4 py-3 fw-medium d-flex align-items-center justify-content-center gap-2 text-secondary w-75 w-sm-auto style-btn style-btn-outline">
                 <i className="bi bi-info-circle-fill "></i>
                 Learn More
               </Link>

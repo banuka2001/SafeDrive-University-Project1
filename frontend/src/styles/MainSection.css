@@ -128,3 +128,53 @@ body.dark .text-black-50 {
   font-size: 1.08rem;
   color: #555;
 } 
+
+.step-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 991.98px) {
+  .bi-arrow-right {
+    display: none !important;
+  }
+}
+
+/* Responsive grid for HowItWorksSection */
+@media (max-width: 991.98px) {
+  /* 2 items per row on tablets */
+  .howitworks-steps-row {
+    flex-wrap: wrap !important;
+  }
+  .howitworks-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .howitworks-arrow {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  /* 4 items per row on large screens, no wrap */
+  .howitworks-steps-row {
+    flex-wrap: nowrap !important;
+  }
+  .howitworks-col {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .howitworks-arrow {
+    align-self: center;
+    margin: 0 8px;
+  }
+}
+
+body.dark .howitworks-arrow {
+  filter: invert(1);
+}
+

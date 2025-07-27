@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col, InputGroup } from 'react-bootstrap';
-import { FaCar, FaEye, FaEyeSlash, FaUser, FaEnvelope, FaLock, FaCamera, FaStar } from 'react-icons/fa';
+import { FaCar, FaEye, FaEyeSlash, FaUser, FaEnvelope, FaLock, FaCamera, FaStar, FaMapMarkerAlt } from 'react-icons/fa';
 import FileUpload from '../components/FileUpload';
 import '../styles/DriverSignUp.css';
 
@@ -9,9 +9,12 @@ const DriverSignUp = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
+    emailOrPhone: '',
     password: '',
-    experienceYears: ''
+    phone: '',
+    experienceYears: '',
+    age: '',
+    nearestTown: ''
   });
   const [files, setFiles] = useState({
     profilePhoto: null,
@@ -43,12 +46,23 @@ const DriverSignUp = () => {
     event.preventDefault();
     setMessage('');
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?(\d{1,3})?[-. ]?(\(?\d{3}\)?[-. ]?)?(\d{3}[-. ]?)?(\d{4})$/;
+
+    if (!emailRegex.test(formData.emailOrPhone) && !phoneRegex.test(formData.emailOrPhone)) {
+      setMessage('Please enter a valid email or phone number.');
+      return;
+    }
+
     const data = new FormData();
     data.append('firstName', formData.firstName);
     data.append('lastName', formData.lastName);
-    data.append('email', formData.email);
+    data.append('email', formData.emailOrPhone);
     data.append('password', formData.password);
+    data.append('phone', formData.phone);
     data.append('experienceYears', formData.experienceYears);
+    data.append('age', formData.age);
+    data.append('nearestTown', formData.nearestTown);
 
     for (const key in files) {
       if (files[key]) {
@@ -119,21 +133,21 @@ const DriverSignUp = () => {
                       value={formData.lastName}
                       onChange={handleChange}
                       required
-                    />
+                      />
                   </InputGroup>
                 </Form.Group>
               </Col>
             </Row>
 
-            <Form.Group className="mb-3" controlId="email">
+            <Form.Group className="mb-3" controlId="emailOrPhone">
               <Form.Label>Email or Phone Number</Form.Label>
               <InputGroup>
                 <InputGroup.Text><FaEnvelope /></InputGroup.Text>
                 <Form.Control 
-                  type="email" 
+                  type="text" 
                   placeholder="Email or phone number" 
-                  name="email"
-                  value={formData.email}
+                  name="emailOrPhone"
+                  value={formData.emailOrPhone}
                   onChange={handleChange}
                   required
                 />
@@ -158,15 +172,66 @@ const DriverSignUp = () => {
               </InputGroup>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="experienceYears">
-              <Form.Label>Years of Experience</Form.Label>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="phone">
+                  <Form.Label>Phone Number</Form.Label>
+                  <InputGroup>
+                    <InputGroup.Text><FaUser /></InputGroup.Text>
+          
+                    <Form.Control 
+                      type="text" 
+                      placeholder="Enter your phone number" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3" controlId="experienceYears">
+                  <Form.Label>Years of Experience</Form.Label>
+                  <InputGroup>
+                    <InputGroup.Text><FaStar /></InputGroup.Text>
+                    <Form.Control 
+                      type="number" 
+                      placeholder="e.g., 5" 
+                      name="experienceYears"
+                      value={formData.experienceYears}
+                      onChange={handleChange}
+                      required
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Form.Group className="mb-3" controlId="age">
+              <Form.Label>Age</Form.Label>
               <InputGroup>
-                <InputGroup.Text><FaStar /></InputGroup.Text>
+                <InputGroup.Text><FaUser /></InputGroup.Text>
                 <Form.Control 
                   type="number" 
-                  placeholder="e.g., 5" 
-                  name="experienceYears"
-                  value={formData.experienceYears}
+                  placeholder="e.g., 25" 
+                  name="age"
+                  value={formData.age}
+                  onChange={handleChange}
+                  required
+                />
+              </InputGroup>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="nearestTown">
+              <Form.Label>Nearest Town</Form.Label>
+              <InputGroup>
+                <InputGroup.Text><FaMapMarkerAlt /></InputGroup.Text>
+                <Form.Control 
+                  type="text" 
+                  placeholder="e.g., Colombo" 
+                  name="nearestTown"
+                  value={formData.nearestTown}
                   onChange={handleChange}
                   required
                 />
@@ -220,7 +285,7 @@ const DriverSignUp = () => {
           </Form>
 
           <div className="text-center mt-4">
-            <p className="signin-link">Already have an account? <a href="/signin">Sign in</a></p>
+            <p className="signin-link">Already have an account ? <a href="/signin">Sign in</a></p>
           </div>
         </Col>
       </Row>

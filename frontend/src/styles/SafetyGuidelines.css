@@ -1,0 +1,98 @@
+/* SafetyGuidelines.css */
+.safety-guidelines {
+    width: 100%;
+    padding: 2rem 1rem;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+  }
+  
+  .safety-guidelines h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .safety-guidelines h2 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    color: #2563eb;
+    font-weight: 600;
+  }
+  
+  .safety-guidelines p,
+  .safety-guidelines ul {
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: #374151;
+  }
+  
+  .safety-guidelines ul {
+    padding-left: 1.2rem;
+    list-style: disc;
+  }
+  
+  .safety-guidelines li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  
+  .accordion-button::after {
+    display: none !important;
+  }
+  
+  /* Dark Mode */
+
+
+  body.dark .safety-guidelines,
+  .safety-guidelines.dark {
+    color: #f9fafb;
+    background: var(--bg-dark);
+  }
+  
+  body.dark .safety-guidelines h1,
+  body.dark .safety-guidelines h2,
+  .safety-guidelines.dark h1,
+  .safety-guidelines.dark h2 {
+    color: #facc15;
+  }
+  
+  body.dark .safety-guidelines p,
+  body.dark .safety-guidelines li,
+  body.dark .safety-guidelines ul,
+  .safety-guidelines.dark p,
+  .safety-guidelines.dark li,
+  .safety-guidelines.dark ul {
+    color: #e5e7eb;
+  }
+
+/* Accordion dark mode overrides */
+.safety-guidelines.dark .accordion-item,
+.safety-guidelines.dark .accordion-body {
+  background-color: var(--bg-dark) !important;
+  color: #f8fafc !important;
+  border: none;
+}
+.safety-guidelines.dark .accordion-header,
+.safety-guidelines.dark .accordion-button {
+  background-color: #23232b !important;
+  color: #facc15 !important;
+  
+}
+.safety-guidelines.dark .accordion-button:not(.collapsed) {
+  background-color: #282a36 !important;
+  color: #facc15 !important;
+  box-shadow: none;
+}
+.safety-guidelines.dark .accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem #facc15;
+}
+.safety-guidelines.dark .accordion-item {
+  border-color: #333;
+}
+
+
+  
+  

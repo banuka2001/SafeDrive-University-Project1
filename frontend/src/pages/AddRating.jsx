@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import '../styles/AddRating.css';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const TripInfoCard = (props) => (
     <Card className="mb-4 shadow">
@@ -128,6 +129,11 @@ const AddRating = (props) => {
             <Container>
                 <Row className="justify-content-center">
                     <Col md={10} lg={8} xl={6}>
+                        <div className="driver-back-arrow-container">
+                            <button className="driver-back-arrow-btn" onClick={() => navigate(-1)}>
+                                <FaArrowLeft />
+                            </button>
+                        </div>
                         <div className="text-center mb-4">
                             <h2 className="fw-bold">Rate Your Trip</h2>
                             <p className="text-muted">Help us improve by rating your recent experience</p>

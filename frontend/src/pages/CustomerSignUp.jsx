@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col, InputGroup } from 'react-bootstrap';
-import { FaUserPlus, FaEye, FaEyeSlash, FaUser, FaCamera } from 'react-icons/fa';
+import { FaUserPlus, FaEye, FaEyeSlash, FaUser, FaCamera, FaCar } from 'react-icons/fa';
 import FileUpload from '../components/FileUpload';
 import '../styles/CustomerSignUp.css';
 
@@ -11,8 +11,15 @@ const CustomerSignUp = () => {
     lastName: '',
     email: '',
     password: '',
+    phone: '',
+    vehicleNumber: '',
   });
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [files, setFiles] = useState({
+    profilePhoto: null,
+    vehicleFront: null,
+    vehicleBack: null,
+    vehicleSide: null
+  });
   const [message, setMessage] = useState('');
 
   const togglePasswordVisibility = () => {
@@ -27,8 +34,11 @@ const CustomerSignUp = () => {
     }));
   };
 
-  const handleFileSelect = (file) => {
-    setProfilePhoto(file);
+  const handleFileSelect = (controlId, file) => {
+    setFiles(prevFiles => ({
+      ...prevFiles,
+      [controlId]: file
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -40,12 +50,16 @@ const CustomerSignUp = () => {
     data.append('lastName', formData.lastName);
     data.append('email', formData.email);
     data.append('password', formData.password);
+    data.append('phone', formData.phone);
+    data.append('vehicleNumber', formData.vehicleNumber);
     
-    if (profilePhoto) {
-      data.append('profilePhoto', profilePhoto);
-    } else {
-      setMessage(`Error: Please upload your profile photo.`);
-      return;
+    for (const key in files) {
+      if (files[key]) {
+        data.append(key, files[key]);
+      } else {
+        setMessage(`Error: Please upload the ${key.replace(/([A-Z])/g, ' $1').toLowerCase()} image.`);
+        return;
+      }
     }
 
     try {
@@ -107,7 +121,7 @@ const CustomerSignUp = () => {
               <Form.Group as={Col} md={6} controlId="formGridEmail">
                 <Form.Label>Email or Phone Number *</Form.Label>
                 <Form.Control 
-                  type="email" 
+                  type="text" 
                   placeholder="Email or phone number" 
                   name="email"
                   value={formData.email}
@@ -134,6 +148,36 @@ const CustomerSignUp = () => {
               </Form.Group>
             </Row>
 
+            <Row className="mb-4 g-3">
+              <Form.Group as={Col} md={6} controlId="formGridPhone">
+                <Form.Label>Phone Number *</Form.Label>
+                <Form.Control 
+                  type="text" 
+                  placeholder="Enter your phone number" 
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group as={Col} md={6} controlId="vehicleNumber">
+              <Form.Label>Vehicle Number</Form.Label>
+              <InputGroup>
+                <InputGroup.Text><FaCar /></InputGroup.Text>
+                <Form.Control 
+                  type="text" 
+                  placeholder="e.g., ABC-123" 
+                  name="vehicleNumber"
+                  value={formData.vehicleNumber}
+                  onChange={handleChange}
+                  required
+                />
+              </InputGroup>
+            </Form.Group>
+            </Row>
+
+
             <h5 className="mt-5 mb-3">Profile Photo</h5>
             <FileUpload
               controlId="profilePhoto"
@@ -141,8 +185,48 @@ const CustomerSignUp = () => {
               subText="PNG, JPG up to 5MB"
               icon={<FaCamera size={30} className="text-muted mb-2" />}
               accept="image/png, image/jpeg"
-              onFileSelect={(file) => handleFileSelect(file)}
+              onFileSelect={(file) => handleFileSelect('profilePhoto', file)}
             />
+
+            <h5 className="mt-5 mb-3">Vehicle Photos</h5>
+            <Row>
+              <Col md={4} className="mb-3">
+                <Form.Label>Vehicle Photo (Front)</Form.Label>
+                <FileUpload
+                  controlId="vehicleFront"
+                  uploadText="Upload vehicle front"
+                  subText="PNG, JPG"
+                  icon={<FaCamera size={30} className="text-muted mb-2" />}
+                  accept="image/png, image/jpeg"
+                  onFileSelect={(file) => handleFileSelect('vehicleFront', file)}
+                  colProps={{ xs: 12 }}
+                />
+              </Col>
+              <Col md={4} className="mb-3">
+                <Form.Label>Vehicle Photo (Back)</Form.Label>
+                <FileUpload
+                  controlId="vehicleBack"
+                  uploadText="Upload vehicle back"
+                  subText="PNG, JPG"
+                  icon={<FaCamera size={30} className="text-muted mb-2" />}
+                  accept="image/png, image/jpeg"
+                  onFileSelect={(file) => handleFileSelect('vehicleBack', file)}
+                  colProps={{ xs: 12 }}
+                />
+              </Col>
+              <Col md={4} className="mb-3">
+                <Form.Label>Vehicle Photo (Side)</Form.Label>
+                <FileUpload
+                  controlId="vehicleSide"
+                  uploadText="Upload vehicle side"
+                  subText="PNG, JPG"
+                  icon={<FaCamera size={30} className="text-muted mb-2" />}
+                  accept="image/png, image/jpeg"
+                  onFileSelect={(file) => handleFileSelect('vehicleSide', file)}
+                  colProps={{ xs: 12 }}
+                />
+              </Col>
+            </Row>
             
             {message && <p className="text-center mt-4" style={{ whiteSpace: 'pre-wrap' }}>{message}</p>}
 
@@ -152,7 +236,7 @@ const CustomerSignUp = () => {
           </Form>
 
           <div className="text-center mt-4">
-            <p>Already have an account? <a href="/signin">Sign in</a></p>
+            <p className="signin-link">Already have an account? <a href="/signin">Sign in</a></p>
           </div>
         </Col>
       </Row>

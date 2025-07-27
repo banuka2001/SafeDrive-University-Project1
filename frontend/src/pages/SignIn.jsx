@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../styles/ForgetPassword.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SignIn = () => {
     const [email_phone, setEmailPhone] = useState('');

@@ -71,17 +71,18 @@
     margin-bottom: var(--spacing-xs);
 }
 
-.driver-signup-page .form-control {
-    font-size: var(--font-size-base);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: 1px solid var(--form-border);
-    border-radius: var(--border-radius-sm);
+.driver-signup-page .input-group .form-control {
+    border-left: none;
 }
 
 .driver-signup-page .create-account-btn {
     font-size: var(--font-size-base);
     padding: 0.8rem;
     font-weight: var(--font-weight-semibold);
+}
+
+.driver-signup-page .input-group-text {
+    background-color: white;
 }
 
 .driver-signup-page .form-icon-container {
@@ -139,3 +140,16 @@ body.dark .driver-signup-page .password-input-group .input-group-text {
     border-color: var(--form-border-dark);
 }
 
+body.dark .driver-signup-page .input-group-text {
+    background-color: var(--form-bg-dark);
+    border-color: var(--form-border-dark);
+}
+
+body.dark .driver-signup-page .input-group > .form-control {
+    background-color: var(--form-bg-dark);
+    color: var(--text-primary-dark);
+}
+
+body.dark .driver-signup-page .signin-link {
+    color: white;
+}

@@ -30,3 +30,7 @@ body.dark .input-group-text {
     border-color: var(--border-dark);
     color: var(--text-secondary-dark);
 }
+
+body.dark .signin-link {
+    color:white !important;
+}

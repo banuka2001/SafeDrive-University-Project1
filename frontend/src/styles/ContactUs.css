@@ -1,0 +1,78 @@
+/* ContactUs.css */
+.contact-us {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    line-height: 1.7;
+  }
+  
+  .contact-us h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #111827;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-us h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: #2563eb;
+    font-weight: 600;
+  }
+  
+  .contact-us p,
+  .contact-us ul {
+    font-size: 1.05rem;
+    margin-top: 1rem;
+    color: #374151;
+  }
+  
+  .contact-us ul {
+      padding-left: 1.5rem;
+      list-style-type: disc;
+    }
+    
+    .contact-us li {
+        list-style: none;
+        margin-bottom: 0.5rem;
+    }
+    
+   
+  .contact-us a {
+      
+    color: #2563eb;
+    text-decoration: none;
+  }
+  
+  .contact-us a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Dark Mode */
+  body.dark .contact-us {
+    color: #f9fafb;
+  }
+  
+  body.dark .contact-us h1,
+  body.dark .contact-us h2 {
+    color: #facc15;
+  }
+  
+  body.dark .contact-us p,
+  body.dark .contact-us li {
+    color: #e5e7eb;
+  }
+  
+  body.dark .contact-us a {
+    color: #93c5fd;
+  }
+
+
+
+
+
+  
+  
