@@ -1,11 +1,8 @@
 <?php
-$allowed_origin = 'http://localhost:5173';
-$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-if ($origin === $allowed_origin) {
-    header("Access-Control-Allow-Origin: $origin");
-    header("Access-Control-Allow-Credentials: true");
-} else {
-    header("Access-Control-Allow-Origin: $allowed_origin");
+require_once '../db.php';
+
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
     header("Access-Control-Allow-Credentials: true");
 }
 header("Access-Control-Allow-Methods: GET, OPTIONS");
@@ -17,29 +14,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-include '../db.php';
+$town = isset($_GET['town']) ? trim($_GET['town']) : '';
 
-$town = isset($_GET['town']) ? $_GET['town'] : '';
-
-if (empty($town)) {
-    echo json_encode([]);
-    exit();
-}
-
-$stmt = $conn->prepare("
-    SELECT driver_id as id, first_name, last_name, experience_years, nearest_town as town
-    FROM drivers 
-    WHERE LOWER(nearest_town) = LOWER(?) AND is_available = 1
-    ORDER BY experience_years DESC
-");
-$stmt->bind_param("s", $town);
-
-$stmt->execute();
-$result = $stmt->get_result();
-$drivers = $result->fetch_all(MYSQLI_ASSOC);
-
-$stmt->close();
-$conn->close();
-
-echo json_encode($drivers);
-?> 
+try {
+    if (empty($town)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'No town provided.']);
+        exit();
+    }
+    $stmt = $conn->prepare("
+        SELECT driver_id as id, first_name, last_name, experience_years, nearest_town as town
+        FROM drivers 
+        WHERE LOWER(nearest_town) = LOWER(?) AND is_available = 1
+        ORDER BY experience_years DESC
+    ");
+    $stmt->bind_param("s", $town);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $drivers = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    if (empty($drivers)) {
+        http_response_code(404);
+        echo json_encode(['error' => 'No available drivers found for this town.']);
+        exit();
+    }
+    http_response_code(200);
+    echo json_encode($drivers);
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Server error', 'message' => $e->getMessage()]);
+} 
