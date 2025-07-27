@@ -1,6 +1,7 @@
 <?php
 require_once '../db.php';
 require_once '../classes/User.php';
+require_once '../classes/Notification.php';
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
@@ -75,10 +76,8 @@ try {
             $customer_user_id = $trip_info['user_id'];
             $destination = $trip_info['destination'];
             $message = "Your trip to " . htmlspecialchars($destination) . " has been approved.";
-            $stmt_notification = $conn->prepare("INSERT INTO notifications (user_id, message) VALUES (?, ?)");
-            $stmt_notification->bind_param("is", $customer_user_id, $message);
-            $stmt_notification->execute();
-            $stmt_notification->close();
+            $notification = new Notification($conn);
+            $notification->createNotification($customer_user_id, $message);
         }
         http_response_code(200);
         echo json_encode(['success' => 'Trip approved successfully.']);

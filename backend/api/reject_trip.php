@@ -32,6 +32,7 @@ session_set_cookie_params([
 session_start();
 
 include '../db.php';
+require_once '../classes/Notification.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     http_response_code(401);
@@ -73,9 +74,8 @@ if ($stmt->execute()) {
         $user_id = $trip_info['user_id'];
         $destination = $trip_info['destination'];
         $message = "Your trip to " . htmlspecialchars($destination) . " has been rejected.";
-        $stmt_notification = $conn->prepare("INSERT INTO notifications (user_id, message) VALUES (?, ?)");
-        $stmt_notification->bind_param("is", $user_id, $message);
-        $stmt_notification->execute();
+        $notification = new Notification($conn);
+        $notification->createNotification($user_id, $message);
     }
 
     http_response_code(200);

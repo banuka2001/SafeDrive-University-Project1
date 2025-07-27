@@ -1,6 +1,6 @@
 <?php
 require_once '../db.php';
-require_once '../classes/User.php';
+require_once '../classes/Notification.php';
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
@@ -28,14 +28,9 @@ try {
         echo json_encode(['error' => 'User not logged in.']);
         exit();
     }
-    $user = new User($conn);
+    $notification = new Notification($conn);
     $user_id = $_SESSION['user_id'];
-    $stmt = $conn->prepare("SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $notifications = $result->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
+    $notifications = $notification->getNotificationsByUserId($user_id);
     http_response_code(200);
     echo json_encode($notifications);
 } catch (Exception $e) {

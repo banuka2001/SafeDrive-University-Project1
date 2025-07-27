@@ -1,6 +1,6 @@
 <?php
 require_once '../db.php';
-require_once '../classes/TripManager.php';
+require_once '../classes/BookingManager.php';
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
@@ -57,7 +57,7 @@ $pickup_town = $data['pickuptown'] ?? '';
 $destination = $data['destination'] ?? '';
 $datetime = $data['datetime'] ?? '';
 $driver_id = $data['driverId'] ?? '';
-$tripManager = new TripManager($conn);
+$tripManager = new BookingManager($conn);
 try {
     $tripManager->scheduleTrip($customer_id, $driver_id, $pickup_location, $destination, $pickup_town, $datetime);
     http_response_code(201);

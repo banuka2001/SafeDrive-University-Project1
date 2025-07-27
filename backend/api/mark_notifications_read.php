@@ -32,6 +32,7 @@ session_set_cookie_params([
 session_start();
 
 include '../db.php';
+require_once '../classes/Notification.php';
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     http_response_code(401);
@@ -41,18 +42,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 $user_id = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0");
-$stmt->bind_param("i", $user_id);
-
-if ($stmt->execute()) {
+$notification = new Notification($conn);
+try {
+    $notification->markNotificationsAsRead($user_id);
     http_response_code(200);
     echo json_encode(['success' => 'Notifications marked as read.']);
-} else {
+} catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Failed to mark notifications as read.']);
+    echo json_encode(['error' => 'Failed to mark notifications as read: ' . $e->getMessage()]);
 }
-
-$stmt->close();
-$conn->close();
 
 ?> 
