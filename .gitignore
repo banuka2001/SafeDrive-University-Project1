@@ -23,8 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 
-# Ignore uploaded images and files
-backend/uploads/driver_profiles/
-backend/uploads/customer_profiles/
-backend/uploads/driver/
-backend/uploads/customer/
+# Ignore only the contents of upload folders, not the folders themselves
+backend/uploads/driver_profiles/*
+backend/uploads/customer_profiles/*
+backend/uploads/driver/*
+backend/uploads/customer/*
+!backend/uploads/driver_profiles/.gitkeep
+!backend/uploads/customer_profiles/.gitkeep
+!backend/uploads/driver/.gitkeep
+!backend/uploads/customer/.gitkeep
