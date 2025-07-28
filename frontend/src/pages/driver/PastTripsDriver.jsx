@@ -35,12 +35,15 @@ export default function PastTrips() {
     }, []);
 
     return (
-        <div className="customer-driver-trip-container">
-            <h2 className="customer-driver-trip-title">Past Trips</h2>
+        <div className="customer-driver-trip-container mt-5">
+            <h2 className="customer-driver-trip-title fw-bold">
+                <span className='text-primary'>Past</span>
+                <span className='text-warning'> Trips</span>
+            </h2>
             {pastTrips.length > 0 ? (
                 <ul className="customer-driver-trip-list">
                     {pastTrips.map(trip => (
-                        <li key={trip.id} className="customer-driver-trip-item">
+                        <li key={trip.id} className="customer-driver-trip-item p-4">
                             <p><strong>Customer:</strong> {trip.customer.name}</p>
                             <p><strong>Phone No:</strong> {trip.customer.phone}</p>
                             <p><strong>Pickup:</strong> {trip.pickup}</p>
